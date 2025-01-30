@@ -9,9 +9,18 @@ app.get('/', (req, res) => {
   res.send('Hello from Node API');
 });
 
+app.post('/api/products', async (req, res) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 mongoose
   .connect(
-    'mongodb+srv://lugpdev2022:hwQNw5SKTqzTWuto@backenddb.nj4l0.mongodb.net/?retryWrites=true&w=majority&appName=BackendDB'
+    'mongodb+srv://lugpdev2022:hwQNw5SKTqzTWuto@backenddb.nj4l0.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB'
   )
   .then(() => {
     console.log('Connected to database');
