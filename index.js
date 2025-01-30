@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/product.model');
@@ -55,7 +57,7 @@ app.put('/api/products/:id', async (req, res) => {
 
 mongoose
   .connect(
-    'mongodb+srv://lugpdev2022:hwQNw5SKTqzTWuto@backenddb.nj4l0.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB'
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@backenddb.nj4l0.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB`
   )
   .then(() => {
     console.log('Connected to database');
